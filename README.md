@@ -48,6 +48,7 @@ New features by EA4GKQ
 * Buttons toolbar
 * LastHeard table are sorted 
 * Some mods to improve mobile experience
+* Disk usage panel info
 
 Contact
 =======
