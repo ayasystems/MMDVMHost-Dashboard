@@ -5,24 +5,30 @@
 	  <div class="table-responsive">  
 			<table id="diskuse" class="table table-condensed table-striped table-hover">
 
+
 					<thead>
+						<colgroup>
+							<col class="col-md-1">
+							<col class="col-md-1">
+							<col class="col-md-2">
+							<col class="col-md-1">
+							<col class="col-md-1">
+							<col class="col-md-1">
+						</colgroup>					
 						<tr>
 						   
-							<th class="w10p filesystem">Filesystem</th>
-							<th class="w20p">Mount</th>
-							<th>Use</th>
-							<th class="w15p">Free</th>
-							<th class="w15p">Used</th>
-							<th class="w15p">Total</th>
+							<th >Filesystem</th>
+							<th >Mount</th>
+							<th style="min-width: 150px">Use</th>
+							<th >Free</th>
+							<th >Used</th>
+							<th >Total</th>
 						</tr>
 					</thead>
 					<tbody>
 						
 <?php
 
- error_reporting(E_ERROR | E_WARNING | E_PARSE);
-
- //include "./functions.php";
  try{
 
  $datas = array();
@@ -47,7 +53,7 @@ else
     {
         list($filesystem, $type, $total, $used, $free, $percent, $mount) = explode(',', $mounted);
 
-       if (strpos($type, 'tmpfs') !== false )
+       if ((strpos($type, 'tmpfs') !== false) && (strpos($mount, '/mnt/ramdisk') === false))
             continue;
 
 
