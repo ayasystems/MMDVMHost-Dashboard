@@ -10,7 +10,7 @@ include "include/tools.php";
 include "include/functions.php";
 ?>
 <!doctype html>
-<html lang="de">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=0.6,maximum-scale=1, user-scalable=yes">
