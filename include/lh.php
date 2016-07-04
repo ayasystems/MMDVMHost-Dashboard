@@ -25,7 +25,8 @@ $totalLH = count($lastHeard);
 for ($i = 0;  ($i < $totalLH); $i++) {
 		$listElem = $lastHeard[$i];
 		echo"<tr>";
-		echo"<td nowrap>$listElem[0]</td>";
+		$fechaHora = explode(" ",$listElem[0]);
+		echo"<td nowrap>$fechaHora[1]</td>";
 		echo"<td nowrap>$listElem[1]</td>";
 		echo"<td nowrap>$listElem[2]</td>";
 		echo"<td nowrap>$listElem[3]</td>";
