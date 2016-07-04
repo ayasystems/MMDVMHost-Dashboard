@@ -30,7 +30,8 @@ for ($i = 0; $i < count($localTXList); $i++) {
 		$listElem = $localTXList[$i];		
 		if ($listElem[5] == "RF" && ($listElem[1]=="D-Star" || startsWith($listElem[1], "DMR") || $listElem[1]=="YSF")) {
 			echo"<tr>";
-			echo"<td nowrap>$listElem[0]</td>";
+		    $fechaHora = explode(" ",$listElem[0]);
+		    echo"<td nowrap>$fechaHora[1]</td>";
 			echo"<td nowrap>$listElem[1]</td>";
 			echo"<td nowrap>$listElem[2]</td>";
 			echo"<td nowrap>$listElem[3]</td>";
