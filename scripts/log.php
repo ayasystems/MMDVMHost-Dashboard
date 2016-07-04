@@ -25,33 +25,28 @@ $fileName = MMDVMLOGPATH. "/MMDVM-".date(Y)."-".date(m)."-".date(d).".log";
     <!-- Das neueste kompilierte und minimierte JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <title><?php echo getCallsign($mmdvmconfigs) ?> - MMDVM-Dashboard by DG9VH</title>
-
   </head>
   <body>
-  <div class="page-header">
-  <h1><small>MMDVM-Dashboard by DG9VH for <?php
-  if (getConfigItem("General", "Duplex", $mmdvmconfigs) == "1") {
-  	echo "Repeater";
-  } else {
-  	echo "Hotspot";  
-  }
-  ?>:</small>  <?php echo getCallsign($mmdvmconfigs) ?></h1>
-  <h4>MMDVMHost by G4KLX Version: <?php echo getMMDVMHostVersion() ?></h4>
-  <button onclick="window.location.href='../index.php'"  type="button" class="btn btn-default navbar-btn"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;Home</button>
-  <button onclick="window.location.href='./rebootmmdvm.php'"  type="button" class="btn btn-default navbar-btn"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>&nbsp;Reboot MMDVMHost</button>
-  <button onclick="window.location.href='./reboot.php'"  type="button" class="btn btn-default navbar-btn"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>&nbsp;Reboot System</button>
-  <button onclick="window.location.href='./halt.php'"  type="button" class="btn btn-default navbar-btn"><span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;ShutDown System</button>
-
-  </script>
-</div>
-<div class="panel panel-log">
-   <div class="panel-heading">
-      <span class="label label-info">Fichero log <?php echo $fileName ?></span>
-   </div>
-  <div class="table-responsive">  
-  <table class="table table-condensed">
-    <tr>Log file</tr>
-
+	  <div class="page-header">
+		  <h1><small>MMDVM-Dashboard by DG9VH for <?php
+		  if (getConfigItem("General", "Duplex", $mmdvmconfigs) == "1") {
+			echo "Repeater";
+		  } else {
+			echo "Hotspot";  
+		  }
+		  ?>:</small>  <?php echo getCallsign($mmdvmconfigs) ?></h1>
+		  <h4>MMDVMHost by G4KLX Version: <?php echo getMMDVMHostVersion() ?></h4>
+		  <button onclick="window.location.href='../index.php'"  type="button" class="btn btn-default navbar-btn"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>&nbsp;Home</button>
+		  <button onclick="window.location.href='./rebootmmdvm.php'"  type="button" class="btn btn-default navbar-btn"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>&nbsp;Reboot MMDVMHost</button>
+		  <button onclick="window.location.href='./reboot.php'"  type="button" class="btn btn-default navbar-btn"><span class="glyphicon glyphicon-repeat" aria-hidden="true"></span>&nbsp;Reboot System</button>
+		  <button onclick="window.location.href='./halt.php'"  type="button" class="btn btn-default navbar-btn"><span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;ShutDown System</button>
+	  </div>
+	  <div class="panel panel-log">
+		<div class="panel-heading"><span class="label label-info">Fichero log <?php echo $fileName ?></span></div>
+		<div class="table-responsive">  
+			<table class="table table-condensed">
+			  <thead><tr>Log file</tr></thead>
+			  <tbody>
 <?php
 /*
 $fileOutput = file_get_contents($fileName, FILE_USE_INCLUDE_PATH);
@@ -63,29 +58,31 @@ var_dump($fileOutput);
 $file = new SplFileObject($fileName);
 
 // Loop until we reach the end of the file.
+
 while (!$file->eof()) {
     // Echo one line from the file.
-	echo"<tr>";
-    echo "<td>";
-	echo $file->fgets();
-    echo "</td>";
-	echo"</tr>\n";
+	$lineLog = $file->fgets();
+	$lineLog = preg_replace('~[\r\n]+~', '', $lineLog);
+if (strpos($lineLog, 'E:') !== false) {
+    echo "			      <tr class=\"error\"><td class=\"error\"><span class=\"label label-danger\">" . $lineLog . "</span></td></tr>\n";
+}else{
+    echo "			      <tr><td>" . $lineLog . "</td></tr>\n";
+}	
+ 
+ 
 }
 
 // Unset the file to call __destruct(), closing the file handle.
 $file = null;
 
 ?>
-   </table>
-   </div>
-   
-   
-   <A NAME="TheEnd">
-  </div>
-	<div class="panel panel-info">
-
-
-<?php
+    
+			  </tbody>
+			</table>
+		</div>   
+	     <A NAME="TheEnd">
+	  </div>
+	  <div class="panel panel-info"><?php
 $datum = date("d-m-Y");
 $uhrzeit = date("H:i:s");
 echo "Last Update $datum, $uhrzeit";
@@ -95,11 +92,7 @@ $time = $time[1] + $time[0];
 $finish = $time;
 $total_time = round(($finish - $start), 4);
 echo '<!--Page generated in '.$total_time.' seconds.-->';	
-?> | get your own at: <a href="https://github.com/dg9vh/MMDVMHost-Dashboard">https://github.com/dg9vh/MMDVMHost-Dashboard</a>
-	</div>
-	<script>
-
-window.location.hash = '#TheEnd';
-</script>
+?> | get your own at: <a href="https://github.com/dg9vh/MMDVMHost-Dashboard">https://github.com/dg9vh/MMDVMHost-Dashboard</a></div>
+	<script>window.location.hash = '#TheEnd';</script>
   </body>
 </html>
