@@ -59,7 +59,7 @@ function checkSetup() {
 	error_reporting(E_ERROR | E_WARNING | E_PARSE);
 	if (defined(DISTRIBUTION)) {
 ?>
-<div class="alert alert-danger" role="alert">You are using an old config.php. Please configure your Dashboard by calling <a href="setup.php">setup.php</a>!</div>
+	<div class="alert alert-danger" role="alert">You are using an old config.php. Please configure your Dashboard by calling <a href="setup.php">setup.php</a>!</div>
 <?php
 		
 		} else {
