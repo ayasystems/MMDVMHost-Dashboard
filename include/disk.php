@@ -62,7 +62,7 @@ else
 						<tr>
 							<td><?php echo $filesystem ?></td>
 							<td><?php echo $mount ?></td>
-							<td><div class="progress"><div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="<?php echo trim($percent, '%') ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo trim($percent, '%') ?>%;"><?php echo trim($percent, '%') ?>%</div></div></td>
+							<td><div class="progress"><div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="<?php echo trim($percent, '%') ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo trim($percent, '%') ?>%;"><span> <?php echo trim($percent, '%') ?>%</span></div></div></td>
 							<td><?php echo getSize($free * 1024) ?></td>
 							<td><?php echo getSize($used * 1024) ?></td>
 							<td><?php echo getSize($total * 1024) ?></td>
