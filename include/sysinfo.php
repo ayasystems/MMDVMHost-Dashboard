@@ -89,6 +89,11 @@
 	$uptime = format_time(substr($output,0,strpos($output," ")));
 	$idletime = format_time((substr($output,strpos($output," ")))/$cpucores);
 
+	$memTotal = shell_exec("cat /proc/meminfo | grep MemTotal: | awk '{print $2}'");
+	
+	$memUsed = shell_exec("cat /proc/meminfo | grep Active: | awk '{print $2}'");
+	
+$memUsage= round($memUsed * 100 / $memTotal);
 ?>
 <div class="panel panel-default">
   <!-- Standard-Panel-Inhalt -->
@@ -102,6 +107,7 @@
 					<th>CPU-Frequency</th>
 					<th>System-Load</th>
 					<th>CPU-Usage</th>
+					<th>Mem-Usage</th>
 					<th>Uptime</th>
 					<th>Idle</th>
 				</tr>
@@ -120,13 +126,31 @@
 			echo "progress-bar-warning";
 		if ($cpuusage >= 60)
 			echo "progress-bar-danger";
-?>" role="progressbar" aria-valuenow="<?php echo $cpuusage; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $cpuusage; ?>%;"><?php echo $cpuusage; ?>%</div></div>
+?>" role="progressbar" aria-valuenow="<?php echo $cpuusage; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $cpuusage; ?>%;"><span>  <?php echo $cpuusage; ?>%</span></div></div>
 <?php
 	} else {
 		echo $cpuusage." %";
 	}
 ?>
 					</td>
+					<td>
+<?php
+	if (defined("SHOWPROGRESSBARS")) {
+?>
+						<div class="progress"><div class="progress-bar <?php
+		if ($cpuusage < 30)
+			echo "progress-bar-success";
+		if ($cpuusage >= 30 and $memUsage < 60)
+			echo "progress-bar-warning";
+		if ($cpuusage >= 60)
+			echo "progress-bar-danger";
+?>" role="progressbar" aria-valuenow="<?php echo $cpuusage; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $memUsage; ?>%;"><span>  <?php echo $memUsage; ?>%</span></div></div>
+<?php
+	} else {
+		echo $memUsage." %";
+	}
+?>
+					</td>									
 					<td><?php echo $uptime; ?></td>
 					<td><?php echo $idletime; ?></td>
 				</tr>
