@@ -49,9 +49,10 @@ New features by EA4GKQ
 * LastHeard table are sorted 
 * Some mods to improve mobile experience
 * Disk usage panel info
+* Mem usage percet progress bar
 
 Contact
 =======
 Feel free to contact the author via email: dg9vh[@]darc.de
 
-Feel free to contact the mod author via email: ea4gkq[@]ure.es
+Feel free to contact the mod author via email: ea4gkq[@]ayasystems.com
