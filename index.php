@@ -26,6 +26,28 @@ include "include/functions.php";
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
     <title><?php echo getCallsign($mmdvmconfigs) ?> - MMDVM-Dashboard by DG9VH</title>
   </head>
+  <style>
+	/**
+	 * Progress bars with centered text
+	 */
+	.progress {
+		position: relative;
+	}
+
+	.bar {
+		z-index: 1;
+		position: absolute;
+	}
+
+	.progress span {
+		position: absolute;
+		top: 0;
+		z-index: 2;
+		color: black; // You might need to change it
+		text-align: center;
+		width: 100%;
+	}	
+  </style>  
   <body>
 	<div class="page-header"><h1><small>MMDVM-Dashboard by DG9VH for <?php if (getConfigItem("General", "Duplex", $mmdvmconfigs) == "1") {
   	echo "Repeater";
